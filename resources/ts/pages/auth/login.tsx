@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/form/register/register-form";
+import LoginForm from "@/components/form/login/login-form";
 import {
   Card,
   CardContent,
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col space-y-4">
-              <RegisterForm />
+              <LoginForm />
               <hr className="border-gray-200" />
               <span className="text-gray-200 text-base">Or log in with</span>
               <div className="flex justify-center space-x-2">
