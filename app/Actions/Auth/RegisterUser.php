@@ -16,7 +16,7 @@ class RegisterUser
         ]);
 
         $team = Team::forceCreate([
-            'owner_id' => $user->id,
+            'user_id' => $user->id,
             'name' => $user->name."'s Team",
             'personal_team' => true,
         ]);
