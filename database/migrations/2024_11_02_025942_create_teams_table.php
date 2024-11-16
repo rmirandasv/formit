@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('logo')->nullable();
             $table->boolean('personal_team')->default(false);
             $table->timestamps();
 
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->index('slug');
         });
 
