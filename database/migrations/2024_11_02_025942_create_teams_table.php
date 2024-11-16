@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('description')->nullable();
-            $table->string('website')->nullable();
             $table->string('logo')->nullable();
-            $table->string('cover')->nullable();
+            $table->boolean('personal_team')->default(false);
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();

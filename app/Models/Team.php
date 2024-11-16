@@ -9,10 +9,7 @@ class Team extends Model
     protected $fillable = [
         'owner_id',
         'name',
-        'slug',
-        'description',
-        'website',
         'logo',
-        'cover',
+        'personal_team',
     ];
 }
