@@ -8,8 +8,6 @@ class TeamUser extends Pivot
 {
     protected $table = 'team_user';
 
-    public $incrementing = true;
-
     public $timestamps = true;
 
     protected $fillable = [
