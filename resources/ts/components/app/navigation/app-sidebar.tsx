@@ -11,7 +11,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
+import clsx from "clsx";
+import { useMemo } from "react";
 
 const items = [
   {
@@ -27,6 +29,8 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const { url } = usePage();
+  const pathname = useMemo(() => url.split("/")[1], [url]);
   return (
     <Sidebar className="border-r-slate-700">
       <SidebarHeader className="bg-slate-800">
@@ -42,7 +46,13 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="text-white">
+                <SidebarMenuItem
+                  key={item.title}
+                  className={clsx(
+                    "text-white",
+                    pathname === item.url.split("/")[1] && "bg-slate-700",
+                  )}
+                >
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
                       <item.icon />
