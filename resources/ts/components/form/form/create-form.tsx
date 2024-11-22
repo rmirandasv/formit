@@ -71,14 +71,16 @@ export const CreateFormForm: FC = () => {
             </FormItem>
           )}
         />
-        <Button
-          type="submit"
-          className="w-full"
-          variant="outline"
-          disabled={isLoading}
-        >
-          {isLoading ? "Saving..." : "Save"}
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            className="w-fit"
+            variant="outline"
+            disabled={isLoading}
+          >
+            {isLoading ? "Saving..." : "Save"}
+          </Button>
+        </div>
       </form>
     </Form>
   );
