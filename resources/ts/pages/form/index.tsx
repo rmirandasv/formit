@@ -8,13 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form, Paginated } from "@/types/global";
 import { Link } from "@inertiajs/react";
 
 export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
   console.log(forms);
   return (
-    <AppLayout>
+    <AppLayout breadcrumbs={getBreadcrumb([{ label: "Forms", url: "/forms" }])}>
       <h1 className="text-white text-3xl">Forms</h1>
       <h2 className="text-white text-lg">Manage your forms</h2>
       <div className="mt-4 flex items-center justify-between">
