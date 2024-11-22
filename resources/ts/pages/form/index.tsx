@@ -26,26 +26,42 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
           Create Form
         </Link>
       </div>
-      <div className="mt-2 pb-2 border rounded-md bg-slate-800">
+      <div className="mt-2 border rounded-md bg-slate-800">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="hover:bg-inherit">
               <TableHead className="text-white">Name</TableHead>
               <TableHead className="text-white">Slug</TableHead>
+              <TableHead className="text-white">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {forms.data.length === 0 && (
-              <TableRow>
+              <TableRow className="hover:bg-inherit">
                 <TableCell colSpan={2} className="text-center text-white">
                   No forms found
                 </TableCell>
               </TableRow>
             )}
             {forms.data.map((form) => (
-              <TableRow key={form.id}>
-                <TableCell>{form.name}</TableCell>
-                <TableCell>{form.slug}</TableCell>
+              <TableRow
+                key={form.id}
+                className="group from-slate-600 to-slate-800 hover:bg-gradient-to-r rounded-b-md"
+              >
+                <TableCell className="text-white group-hover:text-slate-950">
+                  {form.name}
+                </TableCell>
+                <TableCell className="text-white group-hover:text-slate-950">
+                  {form.slug}
+                </TableCell>
+                <TableCell className="text-white group-hover:text-slate-950">
+                  <Link
+                    href={`/forms/${form.id}/edit`}
+                    className="text-indigo-700"
+                  >
+                    Edit
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
