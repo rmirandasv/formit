@@ -19,6 +19,10 @@ class FormField extends Model
         'order',
     ];
 
+    protected $casts = [
+        'options' => 'array',
+    ];
+
     public function form(): BelongsTo
     {
         return $this->belongsTo(Form::class);

@@ -13,6 +13,17 @@ export type Form = {
   name: string;
   slug: string;
   description: string;
+  fields: FormField[];
+};
+
+export type FormField = {
+  id: number;
+  form_id: number;
+  label: string;
+  type: string;
+  options: string[] | null;
+  required: boolean;
+  order: number;
 };
 
 export type Paginated<T> = {

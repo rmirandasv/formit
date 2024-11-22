@@ -32,7 +32,7 @@ class FormController extends Controller
     public function edit(Form $form)
     {
         return Inertia::render('form/edit', [
-            'form' => $form
+            'form' => $form->load('fields')
         ]);
     }
 

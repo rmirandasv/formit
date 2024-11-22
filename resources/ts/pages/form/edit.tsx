@@ -1,3 +1,5 @@
+import FormFieldList from "@/components/app/form/form-field-list";
+import AddFieldForm from "@/components/form/form/add-field-form";
 import { EditForm } from "@/components/form/form/edit-form";
 import AppLayout from "@/components/layout/app-layout";
 import { Card } from "@/components/ui/card";
@@ -29,7 +31,8 @@ export default function EditFormPage({ form }: { form: Form }) {
         <TabsContent value="fields">
           <Card className="bg-slate-800 p-4">
             <span className="text-white text-lg mb-4">Form Fields</span>
-            <p>Fields</p>
+            <FormFieldList fields={form.fields} />
+            <AddFieldForm form={form} />
           </Card>
         </TabsContent>
         <TabsContent value="settings">

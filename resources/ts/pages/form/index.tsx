@@ -39,7 +39,7 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
           <TableBody>
             {forms.data.length === 0 && (
               <TableRow className="hover:bg-inherit">
-                <TableCell colSpan={2} className="text-center text-white">
+                <TableCell colSpan={3} className="text-center text-white">
                   No forms found
                 </TableCell>
               </TableRow>
