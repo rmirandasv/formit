@@ -26,4 +26,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/forms/{form}/edit', [FormController::class, 'edit'])->name('forms.edit');
     Route::put('/forms/{form}', [FormController::class, 'update']);
     Route::post('/forms/{form}/fields', [FormFieldController::class, 'store']);
+    Route::delete('/forms/{form}/fields/{formField}', [FormFieldController::class, 'delete']);
 });

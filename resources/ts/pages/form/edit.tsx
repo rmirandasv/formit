@@ -30,9 +30,11 @@ export default function EditFormPage({ form }: { form: Form }) {
         </TabsContent>
         <TabsContent value="fields">
           <Card className="bg-slate-800 p-4">
-            <span className="text-white text-lg mb-4">Form Fields</span>
-            <FormFieldList fields={form.fields} />
-            <AddFieldForm form={form} />
+            <span className="text-white text-lg">Form Fields</span>
+            <div className="mt-4 flex flex-col space-y-4">
+              <FormFieldList fields={form.fields} />
+              <AddFieldForm form={form} />
+            </div>
           </Card>
         </TabsContent>
         <TabsContent value="settings">
