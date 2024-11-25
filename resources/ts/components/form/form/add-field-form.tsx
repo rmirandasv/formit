@@ -55,6 +55,7 @@ export default function AddFieldForm({
       options: formField?.options || [],
     },
   });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentOption, setCurrentOption] = useState<string>("");
   const needOptions = useMemo(
     () => ["radio", "checkbox"].includes(fieldForm.getValues("type")),
@@ -92,12 +93,16 @@ export default function AddFieldForm({
     router.post(`/forms/${form.id}/fields`, data, {
       onSuccess: () => {
         fieldForm.reset();
+        setIsOpen(false);
       },
     });
   }, []);
   return (
-    <Sheet>
-      <SheetTrigger className="my-2 px-4 py-2 hover:bg-slate-700 text-white rounded-md bg-slate-900 w-full">
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger
+        className="my-2 px-4 py-2 hover:bg-slate-700 text-white rounded-md bg-slate-900 w-full"
+        onClick={() => setIsOpen(true)}
+      >
         Add Field
       </SheetTrigger>
       <SheetContent className="bg-gradient-to-b from-slate-200 to-slate-300">

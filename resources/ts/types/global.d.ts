@@ -21,7 +21,7 @@ export type FormField = {
   form_id: number;
   label: string;
   type: string;
-  options: string[] | null;
+  options: string[];
   required: boolean;
   order: number;
 };
