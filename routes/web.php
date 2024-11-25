@@ -27,4 +27,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/forms/{form}', [FormController::class, 'update']);
     Route::post('/forms/{form}/fields', [FormFieldController::class, 'store']);
     Route::delete('/forms/{form}/fields/{formField}', [FormFieldController::class, 'delete']);
+    Route::put('/forms/{form}/fields/{formField}', [FormFieldController::class, 'update']);
 });

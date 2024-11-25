@@ -1,10 +1,10 @@
 import DeleteFormField from "@/components/form/form/delete-form-field";
+import EditFormField from "@/components/form/form/edit-form-field";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { FormField } from "@/types/global";
 import clsx from "clsx";
 
@@ -27,9 +27,7 @@ export default function FormFieldItem({
           </AccordionTrigger>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="ghost" className="text-indigo-600">
-            Edit
-          </Button>
+          <EditFormField formField={field} />
           <DeleteFormField field={field} />
         </div>
       </div>

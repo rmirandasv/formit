@@ -37,7 +37,7 @@ class FormFieldPolicy
      */
     public function update(User $user, FormField $formField): bool
     {
-        //
+        return $user->current_team_id === $formField->form->team_id;
     }
 
     /**
