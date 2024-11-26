@@ -19,10 +19,17 @@ import { z, ZodSchema } from "zod";
 export const DynamicForm = ({ form }: { form: FormType }) => {
   const dynamicSchema: Record<string, ZodSchema> = {};
   form.fields.forEach((field) => {
-    const baseSchema = z.string();
-    dynamicSchema[field.label] = field.required
-      ? baseSchema.min(1, `${field.label} is required`)
-      : baseSchema.optional();
+    // Si el campo es checkbox, usar un array de strings, si no, usar un string simple
+    if (field.type === "checkbox") {
+      dynamicSchema[field.label] = field.required
+        ? z.array(z.string()).min(1, `${field.label} is required`)
+        : z.array(z.string()).optional();
+    } else {
+      const baseSchema = z.string();
+      dynamicSchema[field.label] = field.required
+        ? baseSchema.min(1, `${field.label} is required`)
+        : baseSchema.optional();
+    }
   });
 
   const schema = z.object(dynamicSchema);
