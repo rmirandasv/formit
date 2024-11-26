@@ -14,6 +14,14 @@ export type Form = {
   slug: string;
   description: string;
   fields: FormField[];
+  url: string;
+  active: boolean;
+  created_at: string;
+  updated_at: string;
+  starts_at: Date | null;
+  ends_at: Date | null;
+  password_protected: boolean;
+  password: string | null;
 };
 
 export type FormField = {

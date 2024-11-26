@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->boolean('active')->default(false);
+            $table->datetime('starts_at')->nullable();
+            $table->datetime('ends_at')->nullable();
+            $table->boolean('password_protected')->default(false);
+            $table->string('password')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

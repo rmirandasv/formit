@@ -1,6 +1,7 @@
 import FormFieldList from "@/components/app/form/form-field-list";
 import AddFieldForm from "@/components/form/form/add-field-form";
 import { EditForm } from "@/components/form/form/edit-form";
+import { FormSettingsForm } from "@/components/form/form/form-settings-form";
 import AppLayout from "@/components/layout/app-layout";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,7 +16,19 @@ export default function EditFormPage({ form }: { form: Form }) {
         { label: form.name, url: `/forms/${form.id}/edit` },
       ])}
     >
-      <h1 className="text-white text-3xl mb-4">Edit {form.name}</h1>
+      <div className="flex flex-col lg:flex-row justify-between items-center">
+        <h1 className="text-white text-3xl mb-4">Edit {form.name}</h1>
+        {form.active && (
+          <a
+            href={form.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 hover:underline"
+          >
+            View Form
+          </a>
+        )}
+      </div>
       <Tabs defaultValue="general">
         <TabsList>
           <TabsTrigger value="general">General Information</TabsTrigger>
@@ -39,8 +52,10 @@ export default function EditFormPage({ form }: { form: Form }) {
         </TabsContent>
         <TabsContent value="settings">
           <Card className="bg-slate-800 p-4">
-            <span className="text-white text-lg mb-4">Settings</span>
-            <p>Settings</p>
+            <span className="text-white text-lg">Settings</span>
+            <div className="mt-4">
+              <FormSettingsForm {...form} />
+            </div>
           </Card>
         </TabsContent>
       </Tabs>

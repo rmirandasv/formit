@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Form\CreateForm;
+use App\Actions\Form\UpdateFormSetting;
 use App\Http\Requests\StoreFormRequest;
+use App\Http\Requests\UpdateFormSettingsRequest;
 use App\Models\Form;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -39,6 +41,12 @@ class FormController extends Controller
     public function update(StoreFormRequest $request, Form $form)
     {
         $form->update($request->validated());
+        return redirect()->route('forms.edit', ['form' => $form]);
+    }
+
+    public function updateSettings(Form $form, UpdateFormSettingsRequest $request, UpdateFormSetting $updateFormSetting)
+    {
+        $updateFormSetting->handle($form, $request->validated());
         return redirect()->route('forms.edit', ['form' => $form]);
     }
 }

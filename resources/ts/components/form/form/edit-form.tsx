@@ -68,6 +68,7 @@ export const EditForm: FC<FormType> = ({ id, name, description }) => {
                 <Textarea
                   className="text-white"
                   placeholder="Your description"
+                  defaultValue={field.value?.toString()}
                   onChange={field.onChange}
                 />
               </FormControl>
