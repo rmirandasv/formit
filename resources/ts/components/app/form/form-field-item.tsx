@@ -36,6 +36,9 @@ export default function FormFieldItem({
           <span className="text-white text-sm">
             Field type: <strong>{field.type}</strong>
           </span>
+          <span className="text-white text-sm">
+            Required: <strong>{field.required ? "Yes" : "No"}</strong>
+          </span>
           {field.options.length > 0 && (
             <span className="text-white text-sm">
               Options: <strong>{field.options.join(", ")}</strong>
