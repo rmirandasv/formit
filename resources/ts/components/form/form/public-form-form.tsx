@@ -21,12 +21,12 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
   form.fields.forEach((field) => {
     // Si el campo es checkbox, usar un array de strings, si no, usar un string simple
     if (field.type === "checkbox") {
-      dynamicSchema[field.label] = field.required
+      dynamicSchema[`field_${field.id}`] = field.required
         ? z.array(z.string()).min(1, `${field.label} is required`)
         : z.array(z.string()).optional();
     } else {
       const baseSchema = z.string();
-      dynamicSchema[field.label] = field.required
+      dynamicSchema[`field_${field.id}`] = field.required
         ? baseSchema.min(1, `${field.label} is required`)
         : baseSchema.optional();
     }
@@ -41,7 +41,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
     resolver: zodResolver(schema),
     defaultValues: form.fields.reduce(
       (acc, field) => {
-        acc[field.label] = field.type === "checkbox" ? [] : "";
+        acc[`field_${field.id}`] = field.type === "checkbox" ? [] : "";
         return acc;
       },
       {} as Record<string, FormData[keyof FormData]>,
@@ -61,16 +61,19 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
           <FormField
             key={field.id}
             control={control}
-            name={field.label}
+            name={`field_${field.id}`}
             render={({ field: fieldProps }) => (
               <FormItem>
-                <FormLabel className="text-white">{field.label}</FormLabel>
+                <FormLabel htmlFor={`field_${field.id}`} className="text-white">
+                  {field.label}
+                </FormLabel>
                 <FormControl>
                   <div>
                     {field.type === "text" && (
                       <Input
                         placeholder={field.label}
                         {...fieldProps}
+                        id={`field_${field.id}`}
                         required={field.required}
                       />
                     )}
@@ -79,6 +82,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                         placeholder={field.label}
                         onChange={fieldProps.onChange}
                         required={field.required}
+                        id={`field_${field.id}`}
                       />
                     )}
                     {field.type === "radio" && field.options && (
@@ -91,8 +95,16 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                             key={option}
                             className="flex items-center space-x-2"
                           >
-                            <RadioGroupItem value={option} />
-                            <label className="text-white">{option}</label>
+                            <RadioGroupItem
+                              value={option}
+                              id={`field_${option}`}
+                            />
+                            <label
+                              htmlFor={`field_${option}`}
+                              className="text-white"
+                            >
+                              {option}
+                            </label>
                           </div>
                         ))}
                       </RadioGroup>
@@ -105,6 +117,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                             className="flex items-center space-x-2"
                           >
                             <Checkbox
+                              id={`field_${option}`}
                               onCheckedChange={(checked) => {
                                 const currentValues =
                                   getValues(field.label) || [];
@@ -116,7 +129,12 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                                 fieldProps.onChange(updatedValues);
                               }}
                             />
-                            <label className="text-white">{option}</label>
+                            <label
+                              htmlFor={`field_${option}`}
+                              className="text-white"
+                            >
+                              {option}
+                            </label>
                           </div>
                         ))}
                       </div>
