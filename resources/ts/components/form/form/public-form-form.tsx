@@ -120,7 +120,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                               id={`field_${option}`}
                               onCheckedChange={(checked) => {
                                 const currentValues =
-                                  getValues(field.label) || [];
+                                  getValues(`field_${field.id}`) || [];
                                 const updatedValues = checked
                                   ? [...currentValues, option]
                                   : currentValues.filter(
