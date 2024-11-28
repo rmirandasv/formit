@@ -78,6 +78,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                   <div>
                     {field.type === "text" && (
                       <Input
+                        className="text-white"
                         placeholder={field.label}
                         {...fieldProps}
                         id={`field_${field.id}`}
@@ -86,6 +87,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                     )}
                     {field.type === "textarea" && (
                       <Textarea
+                        className="text-white"
                         placeholder={field.label}
                         onChange={fieldProps.onChange}
                         required={field.required}
@@ -103,6 +105,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                             className="flex items-center space-x-2"
                           >
                             <RadioGroupItem
+                              className="text-white border-white"
                               value={option}
                               id={`field_${option}`}
                             />
@@ -125,6 +128,7 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
                           >
                             <Checkbox
                               id={`field_${option}`}
+                              className="text-white border-white bg-gray-800"
                               onCheckedChange={(checked) => {
                                 const currentValues =
                                   getValues(`field_${field.id}`) || [];
