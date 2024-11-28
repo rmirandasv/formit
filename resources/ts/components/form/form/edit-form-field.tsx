@@ -136,7 +136,7 @@ export default function EditFormField({
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="text">Text</SelectItem>
-                        <SelectItem value="texarea">Textarea</SelectItem>
+                        <SelectItem value="textarea">Textarea</SelectItem>
                         <SelectItem value="radio">Radio</SelectItem>
                         <SelectItem value="checkbox">Checkbox</SelectItem>
                       </SelectContent>

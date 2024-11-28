@@ -13,6 +13,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Form as FormType } from "@/types/global";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { router } from "@inertiajs/react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z, ZodSchema } from "zod";
 
@@ -50,9 +52,14 @@ export const DynamicForm = ({ form }: { form: FormType }) => {
 
   const { handleSubmit, control, getValues } = formMethods;
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form submitted successfully:", data);
-  };
+  const onSubmit = useCallback(
+    (data: FormData) => {
+      router.post(`/f/${form.slug}`, {
+        fields: data,
+      });
+    },
+    [form.slug],
+  );
 
   return (
     <Form {...formMethods}>

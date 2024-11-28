@@ -33,3 +33,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 });
 
 Route::get('/f/{form:slug}', [PublicFormController::class, 'show'])->name('public-forms.show');
+Route::post('/f/{form:slug}', [PublicFormController::class, 'store']);
+Route::get('/f/{form:slug}/thank-you', [PublicFormController::class, 'thankYou'])->name('public-forms.thank-you');

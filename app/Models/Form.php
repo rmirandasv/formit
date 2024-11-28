@@ -47,6 +47,11 @@ class Form extends Model
         return $this->belongsTo(Team::class);
     }
 
+    public function submissions(): HasMany
+    {
+        return $this->hasMany(FormSubmission::class);
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('active', true);
