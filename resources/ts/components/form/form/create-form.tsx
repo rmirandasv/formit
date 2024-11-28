@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "@inertiajs/react";
 import { FC, useCallback, useState } from "react";
@@ -21,6 +22,7 @@ const FormSchema = z.object({
 });
 
 export const CreateFormForm: FC = () => {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -31,7 +33,14 @@ export const CreateFormForm: FC = () => {
   });
   const onSubmit = useCallback((data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
-    router.post("/forms", data);
+    router.post("/forms", data, {
+      onSuccess: () => {
+        toast({
+          title: "Form created successfully",
+          description: "You can now start adding fields to your form",
+        });
+      },
+    });
     setIsLoading(false);
   }, []);
   return (

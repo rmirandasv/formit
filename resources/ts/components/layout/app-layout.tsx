@@ -3,6 +3,7 @@ import { AppLayoutProps } from "./app.layout.types";
 import { SidebarProvider } from "../ui/sidebar";
 import { AppSidebar } from "../app/navigation/app-sidebar";
 import AppTopbar from "../app/navigation/app-topbar";
+import { Toaster } from "../ui/toaster";
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children, breadcrumbs }) => {
   return (
@@ -16,6 +17,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, breadcrumbs }) => {
           </main>
         </div>
       </SidebarProvider>
+      <Toaster />
     </div>
   );
 };
