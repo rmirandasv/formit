@@ -50,7 +50,12 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
               </span>
               <span className="text-lg">Submissions</span>
             </CardContent>
-            <CardFooter className="flex justify-end">
+            <CardFooter className="flex items-center justify-between">
+              {form.active ? (
+                <span className="text-green-600">Active</span>
+              ) : (
+                <span className="text-red-600">Inactive</span>
+              )}
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <MoreVerticalIcon />
