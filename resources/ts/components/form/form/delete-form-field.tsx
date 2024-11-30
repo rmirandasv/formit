@@ -9,13 +9,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useToast } from "@/hooks/use-toast";
 import { FormField } from "@/types/global";
 import { router } from "@inertiajs/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 export default function DeleteFormField({ field }: { field: FormField }) {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleDelete = useCallback(() => {
-    router.delete(`/forms/${field.form_id}/fields/${field.id}`);
+    setIsLoading(true);
+    router.delete(`/forms/${field.form_id}/fields/${field.id}`, {
+      onSuccess: () => {
+        setIsLoading(false);
+        toast({
+          title: "Field Deleted",
+          description: "Your form field has been deleted.",
+        });
+      },
+    });
   }, [field]);
   return (
     <AlertDialog>
@@ -31,12 +43,13 @@ export default function DeleteFormField({ field }: { field: FormField }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-red-600 hover:bg-red-500"
             onClick={handleDelete}
+            disabled={isLoading}
           >
-            Continue
+            {isLoading ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

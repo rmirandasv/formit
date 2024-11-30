@@ -24,6 +24,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
 import { FormField as FormFieldType } from "@/types/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "@inertiajs/react";
@@ -53,6 +54,7 @@ export default function EditFormField({
       options: formField?.options || [],
     },
   });
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentOption, setCurrentOption] = useState<string>("");
   const needOptions = useMemo(
@@ -92,6 +94,10 @@ export default function EditFormField({
       onSuccess: () => {
         fieldForm.reset();
         setIsOpen(false);
+        toast({
+          title: "Field updated",
+          description: "The field has been updated successfully",
+        });
       },
     });
   }, []);

@@ -24,6 +24,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
 import { Form as FormType, FormField as FormFieldType } from "@/types/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "@inertiajs/react";
@@ -55,6 +56,7 @@ export default function AddFieldForm({
       options: formField?.options || [],
     },
   });
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentOption, setCurrentOption] = useState<string>("");
   const needOptions = useMemo(
@@ -94,6 +96,10 @@ export default function AddFieldForm({
       onSuccess: () => {
         fieldForm.reset();
         setIsOpen(false);
+        toast({
+          title: "Field added",
+          description: "The field has been added to the form",
+        });
       },
     });
   }, []);

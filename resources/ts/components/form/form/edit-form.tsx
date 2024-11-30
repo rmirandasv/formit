@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 import { Form as FormType } from "@/types/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "@inertiajs/react";
@@ -22,6 +23,7 @@ const FormSchema = z.object({
 });
 
 export const EditForm: FC<FormType> = ({ id, name, description }) => {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -33,8 +35,15 @@ export const EditForm: FC<FormType> = ({ id, name, description }) => {
   const onSubmit = useCallback(
     (data: z.infer<typeof FormSchema>) => {
       setIsLoading(true);
-      router.put(`/forms/${id}`, data);
-      setIsLoading(false);
+      router.put(`/forms/${id}`, data, {
+        onSuccess: () => {
+          setIsLoading(false);
+          toast({
+            title: "Form updated",
+            description: "Form has been updated successfully",
+          });
+        },
+      });
     },
     [id],
   );

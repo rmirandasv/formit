@@ -19,11 +19,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { FC, useCallback } from "react";
+import { FC, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { router } from "@inertiajs/react";
+import { useToast } from "@/hooks/use-toast";
 
 const FormSchema = z.object({
   active: z.boolean(),
@@ -51,10 +52,21 @@ export const FormSettingsForm: FC<FormType> = ({
       password,
     },
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const onSubmit = useCallback(
     (data: z.infer<typeof FormSchema>) => {
-      router.post(`/forms/${id}/settings`, data);
+      setIsLoading(true);
+      router.post(`/forms/${id}/settings`, data, {
+        onSuccess: () => {
+          setIsLoading(false);
+          toast({
+            title: "Settings Saved",
+            description: "Your form settings have been saved.",
+          });
+        },
+      });
     },
     [id],
   );
@@ -195,8 +207,8 @@ export const FormSettingsForm: FC<FormType> = ({
           />
         )}
         <div className="mt-4 flex justify-end">
-          <Button variant="secondary" type="submit">
-            Save
+          <Button variant="secondary" type="submit" disabled={isLoading}>
+            {isLoading ? "Saving..." : "Save"}
           </Button>
         </div>
       </form>
