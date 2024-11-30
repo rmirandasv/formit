@@ -68,7 +68,7 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
                   <DropdownMenuItem>
                     <Link
                       href={`/forms/${form.id}/edit`}
-                      className="w-full flex items-center space-x-2"
+                      className="w-full flex items-center space-x-2 text-indigo-600"
                     >
                       <Pencil1Icon />
                       <span>Edit</span>
