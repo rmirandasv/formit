@@ -22,6 +22,7 @@ export type Form = {
   ends_at: Date | null;
   password_protected: boolean;
   password: string | null;
+  submissions_count?: number;
 };
 
 export type FormField = {

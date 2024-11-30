@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Form\CreateForm;
+use App\Actions\Form\DeleteForm;
 use App\Actions\Form\UpdateFormSetting;
+use App\Http\Requests\DeleteFormRequest;
 use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormSettingsRequest;
 use App\Models\Form;
@@ -14,7 +16,8 @@ class FormController extends Controller
 {
     public function index()
     {
-        $forms = Form::paginate(10);
+        $forms = Form::withCount('submissions')
+            ->paginate(10);
         return Inertia::render('form/index', [
             'forms' => $forms
         ]);
@@ -48,5 +51,14 @@ class FormController extends Controller
     {
         $updateFormSetting->handle($form, $request->validated());
         return redirect()->route('forms.edit', ['form' => $form]);
+    }
+
+    public function delete(Form $form, DeleteFormRequest $request, DeleteForm $deleteForm)
+    {
+        $request->validated();
+
+        $deleteForm->handle($form);
+
+        return redirect()->route('forms');
     }
 }

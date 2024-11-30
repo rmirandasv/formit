@@ -1,13 +1,22 @@
+import { DeleteForm } from "@/components/form/form/delete-form";
 import AppLayout from "@/components/layout/app-layout";
-import { Input } from "@/components/ui/input";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from "@/components/ui/table";
 import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form, Paginated } from "@/types/global";
 import { Link } from "@inertiajs/react";
@@ -27,46 +36,25 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
           Create Form
         </Link>
       </div>
-      <div className="mt-2 border rounded-md bg-slate-800">
-        <Table>
-          <TableHeader>
-            <TableRow className="hover:bg-inherit">
-              <TableHead className="text-white">Name</TableHead>
-              <TableHead className="text-white">Slug</TableHead>
-              <TableHead className="text-white">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {forms.data.length === 0 && (
-              <TableRow className="hover:bg-inherit">
-                <TableCell colSpan={3} className="text-center text-white">
-                  No forms found
-                </TableCell>
-              </TableRow>
-            )}
-            {forms.data.map((form) => (
-              <TableRow
-                key={form.id}
-                className="group from-slate-600 to-slate-800 hover:bg-gradient-to-r rounded-b-md"
-              >
-                <TableCell className="text-white group-hover:text-slate-950">
-                  {form.name}
-                </TableCell>
-                <TableCell className="text-white group-hover:text-slate-950">
-                  {form.slug}
-                </TableCell>
-                <TableCell className="text-white group-hover:text-slate-950">
-                  <Link
-                    href={`/forms/${form.id}/edit`}
-                    className="text-indigo-700"
-                  >
-                    Edit
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {forms.data.map((form) => (
+          <Card key={form.id}>
+            <CardHeader>
+              <CardTitle>{form.name}</CardTitle>
+              <CardDescription>{form.description}</CardDescription>
+            </CardHeader>
+            <CardContent>{form.submissions_count || 0} Submissions</CardContent>
+            <CardFooter className="flex justify-between">
+              <Link href={`/forms/${form.id}`} className="text-indigo-700">
+                View
+              </Link>
+              <Link href={`/forms/${form.id}/edit`} className="text-indigo-700">
+                Edit
+              </Link>
+              <DeleteForm form={form} />
+            </CardFooter>
+          </Card>
+        ))}
       </div>
     </AppLayout>
   );
