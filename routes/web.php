@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormFieldController;
 use App\Http\Controllers\PublicFormController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -30,6 +31,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/forms/{form}/fields', [FormFieldController::class, 'store']);
     Route::delete('/forms/{form}/fields/{formField}', [FormFieldController::class, 'delete']);
     Route::put('/forms/{form}/fields/{formField}', [FormFieldController::class, 'update']);
+
+    Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [UserProfileController::class, 'update']);
 });
 
 Route::get('/f/{form:slug}', [PublicFormController::class, 'show'])->name('public-forms.show');

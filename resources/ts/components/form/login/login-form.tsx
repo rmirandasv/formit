@@ -30,8 +30,11 @@ const LoginForm: FC = () => {
   });
   const onSubmit = useCallback((data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
-    router.post("/login", data);
-    setIsLoading(false);
+    router.post("/login", data, {
+      onSuccess: () => {
+        setIsLoading(false);
+      },
+    });
   }, []);
   return (
     <Form {...form}>
