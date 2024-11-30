@@ -1,4 +1,3 @@
-import { DeleteForm } from "@/components/form/form/delete-form";
 import AppLayout from "@/components/layout/app-layout";
 import {
   Card,
@@ -8,18 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow,
-// } from "@/components/ui/table";
 import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form, Paginated } from "@/types/global";
 import { Link } from "@inertiajs/react";
+import { EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { MoreVerticalIcon } from "lucide-react";
 
 export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
   console.log(forms);
@@ -36,22 +35,47 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
           Create Form
         </Link>
       </div>
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {forms.data.map((form) => (
           <Card key={form.id}>
             <CardHeader>
-              <CardTitle>{form.name}</CardTitle>
-              <CardDescription>{form.description}</CardDescription>
+              <CardTitle className="line-clamp-1">{form.name}</CardTitle>
+              <CardDescription className="line-clamp-1">
+                {form.description}
+              </CardDescription>
             </CardHeader>
-            <CardContent>{form.submissions_count || 0} Submissions</CardContent>
-            <CardFooter className="flex justify-between">
-              <Link href={`/forms/${form.id}`} className="text-indigo-700">
-                View
-              </Link>
-              <Link href={`/forms/${form.id}/edit`} className="text-indigo-700">
-                Edit
-              </Link>
-              <DeleteForm form={form} />
+            <CardContent className="flex flex-col items-center">
+              <span className="text-4xl font-bold">
+                {form.submissions_count || 0}
+              </span>
+              <span className="text-lg">Submissions</span>
+            </CardContent>
+            <CardFooter className="flex justify-end">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <MoreVerticalIcon />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <Link
+                      href={`/forms/${form.id}`}
+                      className="w-full flex items-center space-x-2"
+                    >
+                      <EyeOpenIcon />
+                      <span>View</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link
+                      href={`/forms/${form.id}/edit`}
+                      className="w-full flex items-center space-x-2"
+                    >
+                      <Pencil1Icon />
+                      <span>Edit</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </CardFooter>
           </Card>
         ))}
