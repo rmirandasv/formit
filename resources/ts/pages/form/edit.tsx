@@ -7,26 +7,26 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form } from "@/types/global";
+import { Link } from "@inertiajs/react";
 
 export default function EditFormPage({ form }: { form: Form }) {
   return (
     <AppLayout
       breadcrumbs={getBreadcrumb([
         { label: "Forms", url: "/forms" },
-        { label: form.name, url: `/forms/${form.id}/edit` },
+        { label: form.name, url: `/forms/${form.id}` },
+        { label: "Edit", url: `/forms/${form.id}/edit` },
       ])}
     >
       <div className="flex flex-col lg:flex-row justify-between items-center">
         <h1 className="text-white text-3xl mb-4">Edit {form.name}</h1>
         {form.active && (
-          <a
-            href={form.url}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href={`/forms/${form.id}`}
             className="text-blue-500 hover:underline"
           >
             View Form
-          </a>
+          </Link>
         )}
       </div>
       <Tabs defaultValue="general">

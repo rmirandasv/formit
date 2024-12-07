@@ -11,9 +11,11 @@ import clsx from "clsx";
 export default function FormFieldItem({
   field,
   className,
+  hideActions,
 }: {
   field: FormField;
   className?: string;
+  hideActions?: boolean;
 }) {
   return (
     <AccordionItem
@@ -26,10 +28,12 @@ export default function FormFieldItem({
             {field.label}
           </AccordionTrigger>
         </div>
-        <div className="flex items-center space-x-2">
-          <EditFormField formField={field} />
-          <DeleteFormField field={field} />
-        </div>
+        {!hideActions && (
+          <div className="flex items-center space-x-2">
+            <EditFormField formField={field} />
+            <DeleteFormField field={field} />
+          </div>
+        )}
       </div>
       <AccordionContent>
         <div className="flex flex-col space-y-2">

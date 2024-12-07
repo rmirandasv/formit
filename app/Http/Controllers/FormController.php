@@ -10,6 +10,7 @@ use App\Http\Requests\StoreFormRequest;
 use App\Http\Requests\UpdateFormSettingsRequest;
 use App\Models\Form;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class FormController extends Controller
@@ -20,6 +21,30 @@ class FormController extends Controller
             ->paginate(10);
         return Inertia::render('form/index', [
             'forms' => $forms
+        ]);
+    }
+
+    public function show(Form $form)
+    {
+        if (! Gate::allows('view', $form)) {
+            abort(403);
+        }
+
+        $submissionsPerDay = $form->submissions()
+            ->selectRaw('DATE(submitted_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'date' => $item->date,
+                    'submissions' => $item->count
+                ];
+            })
+            ->toArray();
+
+        return Inertia::render('form/show', [
+            'form' => $form->load('fields'),
+            'submissionsPerDay' => $submissionsPerDay
         ]);
     }
 

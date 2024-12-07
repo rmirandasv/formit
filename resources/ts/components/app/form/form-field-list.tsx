@@ -3,7 +3,13 @@ import { FormField } from "@/types/global";
 import FormFieldItem from "./form-field-item";
 import clsx from "clsx";
 
-export default function FormFieldList({ fields }: { fields: FormField[] }) {
+export default function FormFieldList({
+  fields,
+  hideActions,
+}: {
+  fields: FormField[];
+  hideActions?: boolean;
+}) {
   return (
     <Accordion type="multiple">
       {fields.map((field) => (
@@ -14,6 +20,7 @@ export default function FormFieldList({ fields }: { fields: FormField[] }) {
             field.id === fields[0].id && "rounded-t-md",
             field.id === fields[fields.length - 1].id && "rounded-b-md",
           )}
+          hideActions={hideActions}
         />
       ))}
     </Accordion>
