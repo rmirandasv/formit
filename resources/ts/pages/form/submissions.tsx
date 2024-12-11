@@ -40,7 +40,7 @@ export default function FormSubmissions({
         { label: "Submissions", url: `/forms/${form.id}/submissions` },
       ])}
     >
-      <h1 className="text-white text-3xl">Form Submissions</h1>
+      <h1 className="text-white text-2xl lg:text-3xl">Form Submissions</h1>
       <div className="mt-4 flex flex-col space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex justify-start">

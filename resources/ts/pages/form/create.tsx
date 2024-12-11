@@ -12,7 +12,7 @@ export default function CreateForm() {
         { label: "Create Form", url: "/forms/create" },
       ])}
     >
-      <h1 className="text-white text-3xl mb-4">Create Form</h1>
+      <h1 className="text-white text-2xl lg:text-3xl mb-4">Create Form</h1>
       <Tabs defaultValue="general">
         <TabsList>
           <TabsTrigger value="general">General Information</TabsTrigger>

@@ -12,7 +12,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children, breadcrumbs }) => {
         <AppSidebar />
         <div className="flex flex-col w-full">
           <AppTopbar breadcrumbs={breadcrumbs} />
-          <main className="my-12 max-w-7xl w-full mx-auto flex flex-col">
+          <main className="my-12 px-4 lg:px-0 max-w-7xl w-full mx-auto flex flex-col">
             {children}
           </main>
         </div>

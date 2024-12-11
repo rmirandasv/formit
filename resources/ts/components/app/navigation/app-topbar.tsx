@@ -23,25 +23,31 @@ const AppTopbar: FC<AppTopbarProps> = ({ breadcrumbs }) => {
   };
 
   return (
-    <div className="w-full text-white h-16 flex items-center justify-between px-4">
-      <div className="flex items-center space-x-3">
+    <div className="w-full text-white min-h-16 h-full flex flex-col lg:flex-row items-center justify-between px-4 py-2 lg:py-0">
+      <div className="w-full flex items-center lg:space-x-3 justify-between">
         <SidebarTrigger className="p-2 bg-slate-800" />
-        {breadcrumbs}
+        <div className="hidden lg:flex">{breadcrumbs}</div>
+        <div className="flex items-center space-x-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger>{auth.user.name}</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={handleLogout}
+              >
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
-      <div className="flex items-center space-x-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger>{auth.user.name}</DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="/profile">Profile</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
-              Logout
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="mt-4 py-1 w-full flex justify-start lg:hidden">
+        {breadcrumbs}
       </div>
     </div>
   );

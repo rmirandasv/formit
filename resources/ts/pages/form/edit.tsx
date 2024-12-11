@@ -7,7 +7,6 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form } from "@/types/global";
-import { Link } from "@inertiajs/react";
 
 export default function EditFormPage({ form }: { form: Form }) {
   return (
@@ -19,15 +18,9 @@ export default function EditFormPage({ form }: { form: Form }) {
       ])}
     >
       <div className="flex flex-col lg:flex-row justify-between items-center">
-        <h1 className="text-white text-3xl mb-4">Edit {form.name}</h1>
-        {form.active && (
-          <Link
-            href={`/forms/${form.id}`}
-            className="text-blue-500 hover:underline"
-          >
-            View Form
-          </Link>
-        )}
+        <h1 className="text-white text-2xl lg:text-3xl mb-4">
+          Edit {form.name}
+        </h1>
       </div>
       <Tabs defaultValue="general">
         <TabsList>

@@ -32,8 +32,8 @@ export default function ShowForm({
       ])}
     >
       <div className="flex flex-col">
-        <div className="flex items-center justify-between">
-          <h1 className="text-white text-3xl">Form Details</h1>
+        <div className="flex flex-col lg:flwx-row lg:items-center lg:justify-between">
+          <h1 className="text-white text-2xl lg:text-3xl">Form Details</h1>
           <div className="flex items-center space-x-2">
             <Link
               href={form.url}

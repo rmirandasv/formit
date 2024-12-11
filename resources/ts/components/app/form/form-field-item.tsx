@@ -22,14 +22,14 @@ export default function FormFieldItem({
       value={field.id.toString()}
       className={clsx("bg-slate-700 border px-4", className)}
     >
-      <div className="flex flex-row space-x-4">
-        <div className="flex-1">
+      <div className="flex flex-col lg:flex-row lg:space-x-4 pb-2 lg:pb-0">
+        <div className="lg:flex-1">
           <AccordionTrigger className="text-white text-lg">
             {field.label}
           </AccordionTrigger>
         </div>
         {!hideActions && (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center justify-end lg:justify-normal space-x-2">
             <EditFormField formField={field} />
             <DeleteFormField field={field} />
           </div>

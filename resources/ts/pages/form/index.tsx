@@ -18,13 +18,13 @@ import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form, Paginated } from "@/types/global";
 import { Link } from "@inertiajs/react";
 import { EyeOpenIcon, Pencil1Icon } from "@radix-ui/react-icons";
-import { MoreVerticalIcon } from "lucide-react";
+import { MoreVerticalIcon, PlusIcon } from "lucide-react";
 
 export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
   console.log(forms);
   return (
     <AppLayout breadcrumbs={getBreadcrumb([{ label: "Forms", url: "/forms" }])}>
-      <h1 className="text-white text-3xl">Forms</h1>
+      <h1 className="text-white text-2xl lg:text-3xl">Forms</h1>
       <h2 className="text-white text-lg">Manage your forms</h2>
       <div className="mt-4 flex items-center justify-between">
         <Input placeholder="Search forms" className="w-fit" />
@@ -32,7 +32,10 @@ export default function FormIndex({ forms }: { forms: Paginated<Form> }) {
           href="/forms/create"
           className="p-2 bg-indigo-700 rounded-md text-white"
         >
-          Create Form
+          <div>
+            <span className="hidden lg:flex">Create Form</span>
+            <PlusIcon className="lg:hidden" />
+          </div>
         </Link>
       </div>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

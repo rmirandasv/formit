@@ -10,7 +10,7 @@ export default function ThankYout({ form }: { form: Form }) {
         </h1>
         <p className="text-center text-white mt-4">{form.description}</p>
         <div className="flex justify-center mt-8">
-          <p className="text-white text-center">
+          <p className="text-white text-center text-xl">
             Thank you for submitting your response.
           </p>
         </div>
