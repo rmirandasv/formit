@@ -2,14 +2,20 @@ import FormFieldList from "@/components/app/form/form-field-list";
 import FormChart from "@/components/app/form/form-stats";
 import { DeleteForm } from "@/components/form/form/delete-form";
 import AppLayout from "@/components/layout/app-layout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { getBreadcrumb } from "@/lib/breadcrumb";
 import { Form } from "@/types/global";
 import { Link } from "@inertiajs/react";
-import { ArrowUpRightSquare } from "lucide-react";
+import { ArrowRight, ArrowUpRightSquare } from "lucide-react";
 
 export default function ShowForm({
   form,
@@ -69,6 +75,19 @@ export default function ShowForm({
               </div>
             </div>
           </CardContent>
+          {form.submissions_count && form.submissions_count > 0 && (
+            <CardFooter className="flex justify-end">
+              <Link
+                href={`/forms/${form.id}/submissions`}
+                className="text-white flex items-center space-x-2"
+              >
+                <span>
+                  {form.submissions_count} submissions. See detailed information
+                </span>
+                <ArrowRight className="size-6" />
+              </Link>
+            </CardFooter>
+          )}
         </Card>
         <Card className="mt-4 bg-slate-800 border-2 border-solid border-gray-800">
           <CardHeader>

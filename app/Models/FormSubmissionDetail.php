@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FormSubmissionDetail extends Model
 {
@@ -15,4 +16,9 @@ class FormSubmissionDetail extends Model
     protected $casts = [
         'response' => 'array',
     ];
+
+    public function formField(): BelongsTo
+    {
+        return $this->belongsTo(FormField::class);
+    }
 }

@@ -56,3 +56,18 @@ export type PaginationLinks = {
   label: string;
   url: string | null;
 };
+
+export type FormSubmission = {
+  id: number;
+  form_id: number;
+  form: Form;
+  details: FormSubmissionDetail[];
+};
+
+export type FormSubmissionDetail = {
+  id: number;
+  form_submission_id: number;
+  form_field_id: number;
+  form_field: FormField;
+  response: string[];
+};

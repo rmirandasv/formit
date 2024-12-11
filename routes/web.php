@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormFieldController;
+use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\PublicFormController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/forms/{form}/fields', [FormFieldController::class, 'store']);
     Route::delete('/forms/{form}/fields/{formField}', [FormFieldController::class, 'delete']);
     Route::put('/forms/{form}/fields/{formField}', [FormFieldController::class, 'update']);
+    Route::get('/forms/{form}/submissions', [FormSubmissionController::class, 'index'])->name('form-submissions.index');
 
     Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserProfileController::class, 'update']);

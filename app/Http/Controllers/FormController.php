@@ -42,8 +42,11 @@ class FormController extends Controller
             })
             ->toArray();
 
+        $form = Form::with('fields')
+            ->withCount('submissions')
+            ->find($form->id);
         return Inertia::render('form/show', [
-            'form' => $form->load('fields'),
+            'form' => $form,
             'submissionsPerDay' => $submissionsPerDay
         ]);
     }
