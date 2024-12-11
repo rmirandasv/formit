@@ -14,7 +14,7 @@ const WebpageNavigation: React.FC = () => {
       <Link className="text-white text-2xl" href="/">
         Formit
       </Link>
-      <NavigationMenu>
+      <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/">
