@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FormSubmissionExport;
 use App\Models\Form;
 use App\Models\FormField;
 use App\Models\FormSubmission;
@@ -25,5 +26,13 @@ class FormSubmissionController extends Controller
             'form' => $form->load('fields'),
             'submissions' => $submissions
         ]);
+    }
+
+    public function export(Form $form) {
+        if (!Gate::allows('view', $form)) {
+            abort(403);
+        }
+
+        return (new FormSubmissionExport($form))->download('submissions.xlsx');
     }
 }

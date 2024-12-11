@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/forms/{form}/fields/{formField}', [FormFieldController::class, 'delete']);
     Route::put('/forms/{form}/fields/{formField}', [FormFieldController::class, 'update']);
     Route::get('/forms/{form}/submissions', [FormSubmissionController::class, 'index'])->name('form-submissions.index');
+    Route::get('/forms/{form}/submissions/export', [FormSubmissionController::class, 'export'])->name('form-submissions.export');
 
     Route::get('/profile', [UserProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [UserProfileController::class, 'update']);

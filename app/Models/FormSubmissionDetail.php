@@ -21,4 +21,9 @@ class FormSubmissionDetail extends Model
     {
         return $this->belongsTo(FormField::class);
     }
+
+    public function formSubmission(): BelongsTo
+    {
+        return $this->belongsTo(FormSubmission::class);
+    }
 }
