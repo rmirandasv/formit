@@ -30,13 +30,13 @@ const WebpageNavigation: React.FC = () => {
       <div className="flex items-center">
         <Link
           href="/register"
-          className="px-4 py-2 bg-gray-100 text-black uppercase rounded-l-lg"
+          className="px-4 py-2 text-sm lg:text-base bg-gray-100 text-black uppercase rounded-l-lg"
         >
           Register
         </Link>
         <Link
           href="/login"
-          className="px-4 py-2 bg-transparent text-white uppercase border border-white border-l-0 rounded-r-lg"
+          className="px-4 py-2 text-sm lg:text-base bg-transparent text-white uppercase border border-white border-l-0 rounded-r-lg"
         >
           Login
         </Link>

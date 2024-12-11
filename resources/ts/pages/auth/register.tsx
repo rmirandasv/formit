@@ -33,7 +33,7 @@ const Register: React.FC = () => {
           </span>
           <span className="text-white text-base">
             Already have an account?&nbsp;
-            <Link href="#" className="text-blue-400">
+            <Link href="/login" className="text-blue-400">
               Login
             </Link>
           </span>
