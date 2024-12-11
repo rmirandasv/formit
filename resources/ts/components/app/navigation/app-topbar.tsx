@@ -23,11 +23,13 @@ const AppTopbar: FC<AppTopbarProps> = ({ breadcrumbs }) => {
   };
 
   return (
-    <div className="w-full text-white min-h-16 h-full flex flex-col lg:flex-row items-center justify-between px-4 py-2 lg:py-0">
-      <div className="w-full flex items-center lg:space-x-3 justify-between">
+    <div className="w-full text-white min-h-16 h-auto flex flex-col lg:flex-row items-center justify-between px-4 py-2 lg:py-0">
+      <div className="w-full flex items-center justify-between lg:justify-normal lg:space-x-3">
         <SidebarTrigger className="p-2 bg-slate-800" />
-        <div className="hidden lg:flex">{breadcrumbs}</div>
-        <div className="flex items-center space-x-3">
+        <div className="hidden lg:flex lg:self-start w-10/12">
+          {breadcrumbs}
+        </div>
+        <div className="flex items-center space-x-3 w-2/12 justify-end text-nowrap">
           <DropdownMenu>
             <DropdownMenuTrigger>{auth.user.name}</DropdownMenuTrigger>
             <DropdownMenuContent>
