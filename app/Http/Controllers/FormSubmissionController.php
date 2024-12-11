@@ -26,16 +26,4 @@ class FormSubmissionController extends Controller
             'submissions' => $submissions
         ]);
     }
-
-    public function submissions(Form $form, FormField $formField, Request $request) {
-        if (!Gate::allows('view', $form)) {
-            abort(403);
-        }
-
-        $submissions = FormSubmission::with('submissions')
-            ->where('form_id', $form->id)
-            ->paginate($request->get('per_page', 10));
-
-        return response()->json($submissions);
-    }
 }
