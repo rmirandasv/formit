@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $forms = Form::with('submissions')
+        $forms = Form::withCount('submissions')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
