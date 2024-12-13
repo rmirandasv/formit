@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Form\CreateFormFromPrompt;
 use EchoLabs\Prism\Enums\Provider;
 use EchoLabs\Prism\Prism;
+use EchoLabs\Prism\Schema\ArraySchema;
+use EchoLabs\Prism\Schema\ObjectSchema;
+use EchoLabs\Prism\Schema\StringSchema;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +18,7 @@ class AIBuilderController extends Controller
         return Inertia::render('ai-builder/index');
     }
 
-    public function message(Request $request)
+    public function message(Request $request, CreateFormFromPrompt $createFormFromPrompt)
     {
         $data = $request->validate([
             'message' => 'required|string',
@@ -22,14 +26,8 @@ class AIBuilderController extends Controller
 
         $message = $data['message'];
 
-        $response = Prism::text()
-            ->using(Provider::OpenAI, 'gpt-4o')
-            ->withPrompt($message)
-            ->generate();
+        $form = $createFormFromPrompt->handle($message);
 
-        return response()->json([
-            'message' => $message,
-            'response' => $response->text,
-        ]);
+        return redirect()->route('forms.show', $form);
     }
 }
