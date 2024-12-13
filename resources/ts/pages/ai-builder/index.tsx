@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -52,11 +53,19 @@ export default function AIBuilderIndex() {
       </h1>
       {messages.length > 0 && (
         <Card className="mt-4 bg-transparent">
-          <CardContent>
+          <CardContent className="flex flex-col space-y-4 p-4">
             {messages.map((message, index) => (
-              <div key={index} className="mt-4">
-                <div className="text-white">Message: {message.message}</div>
-                <div className="text-white">Response: {message.response}</div>
+              <div key={index} className="p-4 bg-slate-800 rounded-md">
+                <div className="flex flex-col">
+                  <span className="text-white font-bold">Message</span>
+                  <p className="text-white text-pretty">{message.message}</p>
+                </div>
+                <div className="mt-2 flex flex-col">
+                  <span className="text-white font-bold">Response</span>
+                  <Markdown className="text-white text-pretty">
+                    {message.response}
+                  </Markdown>
+                </div>
               </div>
             ))}
           </CardContent>
