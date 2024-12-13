@@ -71,3 +71,8 @@ export type FormSubmissionDetail = {
   form_field: FormField;
   response: string[];
 };
+
+export type AIMessage = {
+  message: string;
+  response: string;
+};
