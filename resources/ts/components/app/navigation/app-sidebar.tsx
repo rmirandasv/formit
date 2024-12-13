@@ -1,4 +1,4 @@
-import { BookText, Home } from "lucide-react";
+import { BookText, BrainIcon, Home } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -20,6 +20,11 @@ const items = [
     title: "Home",
     url: "/dashboard",
     icon: Home,
+  },
+  {
+    title: "AI Builder",
+    url: "/ai-builder",
+    icon: BrainIcon,
   },
   {
     title: "Forms",
